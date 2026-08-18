@@ -1,0 +1,57 @@
+[
+  {
+    "id": "ent-001",
+    "estudiante_id": "est-001",
+    "actividad_id": "act-001",
+    "fecha_entrega": "2026-03-23T18:42:00-03:00",
+    "intento": 1,
+    "archivo_url": "s3://plataforma-edu/entregas/est-001/act-001_v1.pdf",
+    "estado": "entregado",
+    "fuera_de_termino": false,
+    "comentario_estudiante": "Adjunto el diagrama ER y el script DDL."
+  },
+  {
+    "id": "ent-002",
+    "estudiante_id": "est-002",
+    "actividad_id": "act-001",
+    "fecha_entrega": "2026-03-25T09:10:00-03:00",
+    "intento": 1,
+    "archivo_url": "s3://plataforma-edu/entregas/est-002/act-001_v1.pdf",
+    "estado": "entregado",
+    "fuera_de_termino": true,
+    "comentario_estudiante": "Entrego con un día de atraso, tuve problemas de conexión."
+  },
+  {
+    "id": "ent-003",
+    "estudiante_id": "est-001",
+    "actividad_id": "act-002",
+    "fecha_entrega": "2026-04-15T19:55:00-03:00",
+    "intento": 1,
+    "archivo_url": "s3://plataforma-edu/entregas/est-001/act-002_v1.pdf",
+    "estado": "entregado",
+    "fuera_de_termino": false,
+    "comentario_estudiante": null
+  },
+  {
+    "id": "ent-004",
+    "estudiante_id": "est-003",
+    "actividad_id": "act-001",
+    "fecha_entrega": "2026-03-24T21:30:00-03:00",
+    "intento": 2,
+    "archivo_url": "s3://plataforma-edu/entregas/est-003/act-001_v2.pdf",
+    "estado": "reentregado",
+    "fuera_de_termino": false,
+    "comentario_estudiante": "Corrijo la normalización según feedback previo."
+  },
+  {
+    "id": "ent-005",
+    "estudiante_id": "est-004",
+    "actividad_id": "act-004",
+    "fecha_entrega": "2026-03-08T22:58:00-03:00",
+    "intento": 1,
+    "archivo_url": null,
+    "estado": "entregado",
+    "fuera_de_termino": false,
+    "comentario_estudiante": null
+  }
+]

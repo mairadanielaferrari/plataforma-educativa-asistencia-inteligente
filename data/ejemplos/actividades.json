@@ -1,0 +1,62 @@
+[
+  {
+    "id": "act-001",
+    "curso_id": "cur-101",
+    "titulo": "Práctico 1: Modelado relacional",
+    "tipo": "practico",
+    "fecha_publicacion": "2026-03-10",
+    "fecha_limite": "2026-03-24T23:59:00-03:00",
+    "docente_id": "doc-001",
+    "descripcion": "Diseñar el modelo ER de un caso de estudio y normalizar hasta 3FN.",
+    "estado": "vigente",
+    "permite_reentrega": true
+  },
+  {
+    "id": "act-002",
+    "curso_id": "cur-101",
+    "titulo": "Parcial 1 - Modelado de datos",
+    "tipo": "examen_parcial",
+    "fecha_publicacion": "2026-04-01",
+    "fecha_limite": "2026-04-15T20:00:00-03:00",
+    "docente_id": "doc-001",
+    "descripcion": "Evaluación individual sobre modelado conceptual, lógico y normalización.",
+    "estado": "vigente",
+    "permite_reentrega": false
+  },
+  {
+    "id": "act-003",
+    "curso_id": "cur-101",
+    "titulo": "Foro: Trade-offs SQL vs NoSQL",
+    "tipo": "foro",
+    "fecha_publicacion": "2026-03-15",
+    "fecha_limite": "2026-03-29T23:59:00-03:00",
+    "docente_id": "doc-002",
+    "descripcion": "Participación obligatoria con al menos dos intervenciones fundamentadas.",
+    "estado": "vigente",
+    "permite_reentrega": false
+  },
+  {
+    "id": "act-004",
+    "curso_id": "cur-102",
+    "titulo": "Cuestionario: Índices y consultas",
+    "tipo": "cuestionario",
+    "fecha_publicacion": "2026-03-05",
+    "fecha_limite": "2026-03-08T23:59:00-03:00",
+    "docente_id": "doc-003",
+    "descripcion": "Autoevaluación de opción múltiple, corrección automática.",
+    "estado": "cerrado",
+    "permite_reentrega": true
+  },
+  {
+    "id": "act-005",
+    "curso_id": "cur-102",
+    "titulo": "Proyecto final: Diseño de solución de datos",
+    "tipo": "proyecto_final",
+    "fecha_publicacion": "2026-02-20",
+    "fecha_limite": "2026-06-14T23:59:00-03:00",
+    "docente_id": "doc-003",
+    "descripcion": "Entrega integradora grupal con informe técnico y repositorio.",
+    "estado": "vigente",
+    "permite_reentrega": true
+  }
+]

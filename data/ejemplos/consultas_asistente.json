@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cons-001",
+    "estudiante_id": "est-001",
+    "curso_id": "cur-101",
+    "conversacion_id": "conv-001",
+    "texto_consulta": "¿Cómo se calcula la forma normal de una tabla con dependencias transitivas?",
+    "fecha": "2026-04-05T21:03:00-03:00",
+    "canal": "chat_web",
+    "idioma": "es"
+  },
+  {
+    "id": "cons-002",
+    "estudiante_id": "est-002",
+    "curso_id": "cur-101",
+    "conversacion_id": "conv-002",
+    "texto_consulta": "No entiendo la diferencia entre clave primaria y clave foránea, ¿me das un ejemplo?",
+    "fecha": "2026-03-20T15:12:00-03:00",
+    "canal": "chat_web",
+    "idioma": "es"
+  },
+  {
+    "id": "cons-003",
+    "estudiante_id": "est-003",
+    "curso_id": "cur-101",
+    "conversacion_id": "conv-003",
+    "texto_consulta": "¿Qué documento debería leer para el práctico 1 sobre normalización?",
+    "fecha": "2026-03-18T09:47:00-03:00",
+    "canal": "app_movil",
+    "idioma": "es"
+  },
+  {
+    "id": "cons-004",
+    "estudiante_id": "est-004",
+    "curso_id": "cur-102",
+    "conversacion_id": "conv-004",
+    "texto_consulta": "¿Por qué mi calificación del cuestionario no coincide con lo que esperaba?",
+    "fecha": "2026-03-09T12:20:00-03:00",
+    "canal": "chat_web",
+    "idioma": "es"
+  }
+]

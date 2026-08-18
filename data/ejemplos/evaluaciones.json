@@ -1,0 +1,64 @@
+[
+  {
+    "id": "eva-001",
+    "curso_id": "cur-101",
+    "actividad_id": "act-002",
+    "titulo": "Parcial 1 - Modelado de datos",
+    "tipo": "parcial",
+    "modalidad": "individual",
+    "fecha": "2026-04-15",
+    "ponderacion": 0.30,
+    "criterios_evaluacion": [
+      "correctitud del modelo conceptual",
+      "aplicación correcta de normalización",
+      "justificación de decisiones de diseño"
+    ],
+    "docente_id": "doc-001"
+  },
+  {
+    "id": "eva-002",
+    "curso_id": "cur-101",
+    "actividad_id": "act-001",
+    "titulo": "Práctico 1 - Modelado relacional",
+    "tipo": "practico_evaluable",
+    "modalidad": "individual",
+    "fecha": "2026-03-25",
+    "ponderacion": 0.10,
+    "criterios_evaluacion": [
+      "entidades y relaciones identificadas",
+      "cardinalidades correctas"
+    ],
+    "docente_id": "doc-001"
+  },
+  {
+    "id": "eva-003",
+    "curso_id": "cur-102",
+    "actividad_id": "act-005",
+    "titulo": "Proyecto final",
+    "tipo": "proyecto_final",
+    "modalidad": "grupal",
+    "fecha": "2026-06-15",
+    "ponderacion": 0.40,
+    "criterios_evaluacion": [
+      "comprensión del caso de uso",
+      "modelado de la solución",
+      "justificación tecnológica",
+      "implementación mínima"
+    ],
+    "docente_id": "doc-003"
+  },
+  {
+    "id": "eva-004",
+    "curso_id": "cur-102",
+    "actividad_id": "act-004",
+    "titulo": "Cuestionario índices y consultas",
+    "tipo": "cuestionario",
+    "modalidad": "individual",
+    "fecha": "2026-03-08",
+    "ponderacion": 0.05,
+    "criterios_evaluacion": [
+      "corrección automática por opción múltiple"
+    ],
+    "docente_id": "doc-003"
+  }
+]

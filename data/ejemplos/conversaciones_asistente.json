@@ -1,0 +1,85 @@
+[
+  {
+    "id": "conv-001",
+    "estudiante_id": "est-001",
+    "curso_id": "cur-101",
+    "fecha_inicio": "2026-04-05T21:03:00-03:00",
+    "fecha_fin": "2026-04-05T21:07:00-03:00",
+    "canal": "chat_web",
+    "mensajes": [
+      {
+        "rol": "estudiante",
+        "texto": "¿Cómo se calcula la forma normal de una tabla con dependencias transitivas?",
+        "timestamp": "2026-04-05T21:03:00-03:00"
+      },
+      {
+        "rol": "asistente",
+        "texto": "Una tabla está en 3FN si, además de cumplir 2FN, ningún atributo no clave depende transitivamente de la clave primaria...",
+        "timestamp": "2026-04-05T21:03:22-03:00",
+        "fuentes_utilizadas": [
+          {
+            "documento_id": "mat-014",
+            "titulo": "Apunte: Normalización de bases de datos",
+            "fragmento_id": "mat-014#frag-3",
+            "similitud": 0.87
+          }
+        ]
+      }
+    ],
+    "calificacion_satisfaccion": 5,
+    "derivada_a_docente": false
+  },
+  {
+    "id": "conv-002",
+    "estudiante_id": "est-002",
+    "curso_id": "cur-101",
+    "fecha_inicio": "2026-03-20T15:12:00-03:00",
+    "fecha_fin": "2026-03-20T15:14:30-03:00",
+    "canal": "chat_web",
+    "mensajes": [
+      {
+        "rol": "estudiante",
+        "texto": "No entiendo la diferencia entre clave primaria y clave foránea, ¿me das un ejemplo?",
+        "timestamp": "2026-03-20T15:12:00-03:00"
+      },
+      {
+        "rol": "asistente",
+        "texto": "La clave primaria identifica de forma única cada fila de una tabla, y la clave foránea referencia la clave primaria de otra tabla para modelar una relación. Ejemplo: 'estudiante_id' en 'entregas' referencia a 'id' en 'estudiantes'.",
+        "timestamp": "2026-03-20T15:12:40-03:00",
+        "fuentes_utilizadas": [
+          {
+            "documento_id": "mat-002",
+            "titulo": "Apunte: Modelo relacional",
+            "fragmento_id": "mat-002#frag-1",
+            "similitud": 0.91
+          }
+        ]
+      }
+    ],
+    "calificacion_satisfaccion": 4,
+    "derivada_a_docente": false
+  },
+  {
+    "id": "conv-003",
+    "estudiante_id": "est-004",
+    "curso_id": "cur-102",
+    "fecha_inicio": "2026-03-09T12:20:00-03:00",
+    "fecha_fin": "2026-03-09T12:25:00-03:00",
+    "canal": "chat_web",
+    "mensajes": [
+      {
+        "rol": "estudiante",
+        "texto": "¿Por qué mi calificación del cuestionario no coincide con lo que esperaba?",
+        "timestamp": "2026-03-09T12:20:00-03:00"
+      },
+      {
+        "rol": "asistente",
+        "texto": "No tengo acceso a revisar calificaciones individuales en detalle. Te derivo con el docente del curso para que revise tu caso.",
+        "timestamp": "2026-03-09T12:20:15-03:00",
+        "fuentes_utilizadas": []
+      }
+    ],
+    "calificacion_satisfaccion": 2,
+    "derivada_a_docente": true
+  }
+]

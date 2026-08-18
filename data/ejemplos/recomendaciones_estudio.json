@@ -1,0 +1,35 @@
+[
+  {
+    "id": "rec-001",
+    "estudiante_id": "est-002",
+    "curso_id": "cur-101",
+    "tipo": "material_recomendado",
+    "material_id": "mat-014",
+    "motivo": "Bajo desempeño en preguntas sobre normalización (calificación 6.0 en práctico 1)",
+    "generada_por": "asistente_ia",
+    "fecha": "2026-03-29T11:05:00-03:00",
+    "vista_por_estudiante": true
+  },
+  {
+    "id": "rec-002",
+    "estudiante_id": "est-004",
+    "curso_id": "cur-102",
+    "tipo": "actividad_recomendada",
+    "material_id": "act-004",
+    "motivo": "Estudiante en riesgo: avance de 20% en el período con solo 1 actividad completada",
+    "generada_por": "asistente_ia",
+    "fecha": "2026-03-10T08:00:00-03:00",
+    "vista_por_estudiante": false
+  },
+  {
+    "id": "rec-003",
+    "estudiante_id": "est-003",
+    "curso_id": "cur-101",
+    "tipo": "material_recomendado",
+    "material_id": "mat-002",
+    "motivo": "Consulta reciente sobre claves primarias/foráneas relacionada con el próximo parcial",
+    "generada_por": "asistente_ia",
+    "fecha": "2026-03-18T09:50:00-03:00",
+    "vista_por_estudiante": true
+  }
+]

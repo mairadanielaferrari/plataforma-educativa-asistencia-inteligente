@@ -1,0 +1,50 @@
+[
+  {
+    "id": "cal-001",
+    "entrega_id": "ent-001",
+    "estudiante_id": "est-001",
+    "actividad_id": "act-001",
+    "docente_id": "doc-001",
+    "nota": 8.5,
+    "escala": "0-10",
+    "feedback": "Buen modelo, revisar la cardinalidad entre Curso y Docente.",
+    "fecha_correccion": "2026-03-28T10:15:00-03:00",
+    "revisada": true
+  },
+  {
+    "id": "cal-002",
+    "entrega_id": "ent-002",
+    "estudiante_id": "est-002",
+    "actividad_id": "act-001",
+    "docente_id": "doc-001",
+    "nota": 6.0,
+    "escala": "0-10",
+    "feedback": "Entrega tardía. El modelo no llega a 3FN.",
+    "fecha_correccion": "2026-03-29T11:00:00-03:00",
+    "revisada": true
+  },
+  {
+    "id": "cal-003",
+    "entrega_id": "ent-004",
+    "estudiante_id": "est-003",
+    "actividad_id": "act-001",
+    "docente_id": "doc-001",
+    "nota": 9.0,
+    "escala": "0-10",
+    "feedback": "Correcta normalización tras la reentrega.",
+    "fecha_correccion": "2026-03-26T08:40:00-03:00",
+    "revisada": true
+  },
+  {
+    "id": "cal-004",
+    "entrega_id": "ent-003",
+    "estudiante_id": "est-001",
+    "actividad_id": "act-002",
+    "docente_id": "doc-001",
+    "nota": null,
+    "escala": "0-10",
+    "feedback": null,
+    "fecha_correccion": null,
+    "revisada": false
+  }
+]

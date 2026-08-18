@@ -1,0 +1,50 @@
+[
+  {
+    "id": "prog-001",
+    "estudiante_id": "est-001",
+    "curso_id": "cur-101",
+    "periodo": "2026-Q1",
+    "actividades_completadas": 4,
+    "actividades_totales": 6,
+    "promedio_notas": 7.8,
+    "porcentaje_avance": 66.7,
+    "ultima_actividad": "2026-04-15",
+    "en_riesgo": false
+  },
+  {
+    "id": "prog-002",
+    "estudiante_id": "est-002",
+    "curso_id": "cur-101",
+    "periodo": "2026-Q1",
+    "actividades_completadas": 2,
+    "actividades_totales": 6,
+    "promedio_notas": 6.0,
+    "porcentaje_avance": 33.3,
+    "ultima_actividad": "2026-03-25",
+    "en_riesgo": true
+  },
+  {
+    "id": "prog-003",
+    "estudiante_id": "est-003",
+    "curso_id": "cur-101",
+    "periodo": "2026-Q1",
+    "actividades_completadas": 5,
+    "actividades_totales": 6,
+    "promedio_notas": 8.9,
+    "porcentaje_avance": 83.3,
+    "ultima_actividad": "2026-04-10",
+    "en_riesgo": false
+  },
+  {
+    "id": "prog-004",
+    "estudiante_id": "est-004",
+    "curso_id": "cur-102",
+    "periodo": "2026-Q1",
+    "actividades_completadas": 1,
+    "actividades_totales": 5,
+    "promedio_notas": 5.5,
+    "porcentaje_avance": 20.0,
+    "ultima_actividad": "2026-03-08",
+    "en_riesgo": true
+  }
+]
