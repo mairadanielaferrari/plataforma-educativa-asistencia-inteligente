@@ -89,8 +89,13 @@ La justificación del trade-off (normalización vs. denormalización) se desarro
 1. db/estructura/*.sql       (tablas de ambos subdominios)
 2. db/datos/*.sql            (seeds de ambos subdominios)
 3. db/indices_vistas/*.sql   (vistas)
-4. db/integracion/*.sql      (FKs cross-subdominio, al final)
+4. db/integracion/*.sql      (FKs y RLS cross-subdominio, al final, en orden numérico)
 ```
 
-Verificado contra el Postgres del `docker-compose.yml`: el esquema completo aplica sin errores y
-las FK validan los datos de ejemplo de los dos subdominios.
+Verificado contra el Postgres del `docker-compose.yml`, reseteando el volumen y corriendo el
+esquema completo desde cero: aplica sin errores, las FK validan los datos de ejemplo de los dos
+subdominios y las 6 consultas de `db/consultas/*.sql` corren correctamente sobre el esquema
+integrado. `integracion_02_rls_evaluacion.sql` (issue #17, revisión cruzada) extiende el
+aislamiento por estudiante del subdominio de gestión académica (#14) a las tablas de
+evaluación/asistente; se verificó con `SET ROLE app_estudiante` que un estudiante ve solo sus
+propias entregas (2 de 5 filas totales) y que otro estudiante ve un conjunto distinto.

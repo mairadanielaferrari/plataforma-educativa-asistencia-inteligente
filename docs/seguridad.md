@@ -6,7 +6,10 @@
 > permisos) y [`db/estructura/seguridad_02_rls.sql`](../db/estructura/seguridad_02_rls.sql)
 > (row-level security). Probado contra el Postgres del `docker-compose.yml`. La extensión de estas
 > políticas a las tablas del subdominio de evaluación/asistente (entregas, calificaciones,
-> conversaciones) se hace en la integración (issue #5), siguiendo el mismo patrón.
+> progreso académico, conversaciones) se completó en
+> [`db/integracion/integracion_02_rls_evaluacion.sql`](../db/integracion/integracion_02_rls_evaluacion.sql)
+> durante la revisión cruzada (issue #17): el mismo patrón, aislamiento por
+> `app.estudiante_id` verificado con `SET ROLE app_estudiante`.
 
 ## 1. Objetivos
 
@@ -68,10 +71,16 @@ Las acciones sensibles (cambios de calificación, uso del asistente, accesos) se
 `eventos_auditoria` (issue #7). Toda modificación de una calificación debe generar su evento en la
 misma transacción (todo o nada), de modo que el registro de auditoría no pueda divergir del dato.
 
-## 6. Frontera con evaluación y asistente (integración issue #5)
+## 6. Frontera con evaluación y asistente (issue #17)
 
-Las tablas del otro subdominio (`entregas`, `calificaciones`, `conversaciones_asistente`) reciben
-las mismas políticas: un estudiante ve solo sus entregas, calificaciones y conversaciones. El
-docente accede a las de los estudiantes de sus cursos. Se agregan en la integración reutilizando el
-patrón de `app.estudiante_id` y, para el docente, una variable análoga de curso o la relación
-`docente_titular_id`.
+Las tablas del otro subdominio (`actividades`, `evaluaciones`, `entregas`, `calificaciones`,
+`progreso_academico`, `conversaciones_asistente`) reciben el mismo patrón de `app.estudiante_id`:
+un estudiante ve solo sus propias entregas, calificaciones, progreso y conversaciones, y las
+actividades/evaluaciones de los cursos en los que está inscripto activo. `eventos_asistente` (el
+log de auditoría) no se expone al rol `app_estudiante` — es información operativa de la
+plataforma, no un dato de consulta directa para el estudiante.
+
+**Limitación conocida:** el aislamiento por **docente** (que un docente solo vea los cursos que
+dicta) no tiene una política RLS propia todavía, ni en materiales (#14) ni en evaluación/asistente
+(#17) — hoy `app_docente` tiene `GRANT` de lectura amplio sin acotar por `docente_titular_id`. Se
+deja documentado como mejora pendiente (ver `informe.md`, sección 14 y 15).
