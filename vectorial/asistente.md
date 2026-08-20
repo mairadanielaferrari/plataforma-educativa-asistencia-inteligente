@@ -9,6 +9,14 @@
 > consultas en [`db/consultas/vectorial_asistente_consultas.sql`](../db/consultas/vectorial_asistente_consultas.sql).
 > Todo corrido contra el Postgres + pgvector del `docker-compose.yml` del repo.
 
+> **Nota de integración (issue #5):** la tabla de embeddings de fragmentos descrita acá
+> (`material_fragmentos_embeddings`, denormalizada) se reemplazó por el modelo normalizado del
+> subdominio de materiales (`material_fragmentos` + `fragmento_embeddings`, con FK a `materiales`,
+> issue #12). Las consultas de RAG ahora usan esas tablas (ver
+> [`vectorial/materiales.md`](materiales.md) y el archivo de consultas actualizado). El caché de
+> FAQ (`consultas_frecuentes_embeddings`) es propio del asistente y se mantiene. Este documento
+> conserva el diseño y la justificación originales del asistente.
+
 ## 1. Qué se vectoriza
 
 | Colección | Elemento vectorizado | Por qué |
