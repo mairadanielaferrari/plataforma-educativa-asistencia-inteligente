@@ -127,17 +127,17 @@ erDiagram
 
 ## 3. Relaciones y cardinalidades
 
-- **Rol 1:N Usuario** — un usuario tiene exactamente un rol; un rol clasifica muchos usuarios.
-- **Usuario 1:0..1 Estudiante** y **Usuario 1:0..1 Docente** — especialización (ISA) disjunta:
+- **Rol 1:N Usuario**: un usuario tiene exactamente un rol; un rol clasifica muchos usuarios.
+- **Usuario 1:0..1 Estudiante** y **Usuario 1:0..1 Docente**: especialización (ISA) disjunta:
   un usuario se materializa como estudiante o como docente según su rol; los roles tutor,
   coordinador y administrador no requieren tabla especializada (viven solo en `Usuario`).
-- **PeriodoAcademico 1:N Curso** — un curso pertenece a un único período.
-- **Docente 1:N Curso** — un docente titular dicta muchos cursos; un curso tiene un titular.
-- **Estudiante N:M Curso** resuelta por **`Inscripcion`** — un estudiante se inscribe en muchos
+- **PeriodoAcademico 1:N Curso**: un curso pertenece a un único período.
+- **Docente 1:N Curso**: un docente titular dicta muchos cursos; un curso tiene un titular.
+- **Estudiante N:M Curso** resuelta por **`Inscripcion`**: un estudiante se inscribe en muchos
   cursos y un curso tiene muchos estudiantes; la inscripción es única por (estudiante, curso).
-- **Curso 1:N Material** y **Docente 1:N Material** — un material pertenece a un curso y lo
+- **Curso 1:N Material** y **Docente 1:N Material**: un material pertenece a un curso y lo
   publica un docente.
-- **Material 1:N MaterialFragmento** — un material se divide en fragmentos ordenados; el
+- **Material 1:N MaterialFragmento**: un material se divide en fragmentos ordenados; el
   fragmento no tiene existencia fuera del material (relación de composición).
 
 ## 4. Restricciones del dominio
