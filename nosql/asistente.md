@@ -34,7 +34,9 @@ Documento raíz de una interacción estudiante-asistente.
   `calificacion_satisfaccion`, `derivada_a_docente`.
 - **Documento `mensajes` (JSONB, array)**: cada elemento es un mensaje con `rol`
   (`estudiante`/`asistente`), `texto`, `timestamp` y, si es del asistente,
-  `fuentes_utilizadas` (array embebido de `{documento_id, titulo, fragmento_id, similitud}`).
+  `fuentes_utilizadas` (array embebido de `{documento_id, fragmento_id, similitud}`). La cita
+  guarda solo la **referencia** al material (`documento_id`/`fragmento_id`), no una copia de su
+  título ni de su contenido: el título se resuelve contra `materiales` cuando hace falta mostrarlo.
 
 ```json
 {
@@ -48,7 +50,7 @@ Documento raíz de una interacción estudiante-asistente.
       "texto": "Una tabla está en 3FN si...",
       "timestamp": "2026-04-05T21:03:22-03:00",
       "fuentes_utilizadas": [
-        { "documento_id": "mat-014", "titulo": "Apunte: Normalización", "fragmento_id": "mat-014#frag-3", "similitud": 0.87 }
+        { "documento_id": "mat-014", "fragmento_id": "mat-014#frag-3", "similitud": 0.87 }
       ]
     }
   ]
@@ -68,7 +70,7 @@ autorizada). El campo `detalle` es JSONB porque su forma cambia según `tipo_eve
 |---|---|---|
 | Conversación → Mensajes | **Embebido** | Sin existencia propia fuera de la conversación; siempre se leen juntos; evita N+1 al reconstruir el hilo. |
 | Mensaje → Fuentes utilizadas | **Embebido** | Idem: la fuente citada es parte del contexto de esa respuesta puntual, no se consulta de forma aislada. |
-| Fuente utilizada → Material | **Referencia** (`documento_id`) | El material (apunte, FAQ) pertenece al subdominio de materiales de estudio (#10, Maira), tiene ciclo de vida propio y puede ser editado o eliminado; duplicar su contenido en cada cita generaría inconsistencia. |
+| Fuente utilizada → Material | **Referencia** (`documento_id`) | El material (apunte, FAQ) pertenece al subdominio de materiales de estudio (#10, Maira), tiene ciclo de vida propio y puede ser editado o eliminado; por eso la cita guarda **solo** `documento_id`/`fragmento_id` (más `similitud`), nunca una copia del título o del contenido: así no puede quedar desactualizada respecto de `materiales`. El título se resuelve con un JOIN a `materiales` cuando se necesita mostrarlo (ver consulta 2). |
 | Conversación → Estudiante / Curso | **Referencia** (`estudiante_id`, `curso_id`) | Pertenecen al subdominio de gestión académica (#6); son entidades con identidad propia consultadas desde muchos otros lugares. |
 | Evento → Conversación | **Referencia** (`conversacion_id`) | Un evento puede no tener conversación asociada (p. ej. errores de indexación de documentos), y la conversación ya existe como entidad independiente. |
 

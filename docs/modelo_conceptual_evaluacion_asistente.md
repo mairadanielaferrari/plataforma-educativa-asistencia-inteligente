@@ -162,9 +162,16 @@ erDiagram
 | `ConversacionAsistente` | id, estudiante_id, curso_id, fecha_inicio/fin, canal, calificacion_satisfaccion, derivada_a_docente |
 | `Mensaje` (débil, embebido en Conversación) | rol (estudiante/asistente), texto, timestamp |
 | `FuenteUtilizada` (débil, embebida en Mensaje) | documento_id, fragmento_id, similitud |
-| `ConsultaAsistente` | id, estudiante_id, curso_id, conversacion_id, texto_consulta, fecha, canal |
-| `RecomendacionEstudio` | id, estudiante_id, curso_id, material_id, tipo, motivo, generada_por, vista_por_estudiante |
-| `EventoAuditoria` | id, tipo_evento, entidad_afectada, entidad_id, usuario_id, rol, fecha, detalle |
+| `ConsultaAsistente` *(fuera de alcance / diferida)* | id, estudiante_id, curso_id, conversacion_id, texto_consulta, fecha, canal |
+| `RecomendacionEstudio` *(fuera de alcance / diferida)* | id, estudiante_id, curso_id, material_id, tipo, motivo, generada_por, vista_por_estudiante |
+| `EventoAuditoria` → tabla `eventos_auditoria` | id, tipo_evento, entidad_afectada, entidad_id, usuario_id, rol, fecha, detalle |
+
+> **Alcance de implementación.** `EventoAuditoria` se implementa en
+> [`db/estructura/evaluacion_09_eventos_auditoria.sql`](../db/estructura/evaluacion_09_eventos_auditoria.sql)
+> como tabla `eventos_auditoria` (distinta de `eventos_asistente`, que es el log operativo del
+> asistente). En cambio `ConsultaAsistente` y `RecomendacionEstudio` quedan **fuera de alcance /
+> diferidas**: se modelan a nivel conceptual pero no se crean como tablas en esta entrega (no hay
+> consultas que las requieran todavía; ver sección 5 para `ConsultaAsistente`).
 
 ## 3. Relaciones y cardinalidades
 
@@ -187,7 +194,7 @@ erDiagram
 - La `nota` de una `Calificacion` debe estar dentro del rango de su `escala` (p. ej. 0–10).
 - Una `Entrega` fuera de término (`fuera_de_termino = true`) solo es válida si `Actividad.permite_reentrega = true` o existe justificación docente.
 - Un docente no puede calificar entregas de actividades que no le pertenecen.
-- Toda modificación de `Calificacion` debe generar un `EventoAuditoria` (`tipo_evento = cambio_calificacion`).
+- Toda modificación de `Calificacion` debe generar un `EventoAuditoria` (fila en `eventos_auditoria` con `tipo_evento = cambio_calificacion`), en la misma transacción.
 - El asistente solo puede citar como `FuenteUtilizada` materiales a los que el estudiante consultante tiene acceso (riesgo relevado en `relevamiento_datos.md`, resuelto en la arquitectura de seguridad #14/#15).
 - Cuando el asistente no puede resolver una consulta con la información disponible, debe marcar `ConversacionAsistente.derivada_a_docente = true` en lugar de generar una respuesta sin fuente.
 
@@ -200,7 +207,9 @@ Se modelan como dos entidades relacionadas y no una sola, de forma deliberada:
   historial de una interacción.
 - `ConsultaAsistente` es una proyección relacional liviana de cada consulta individual,
   pensada para las consultas SQL analíticas del subdominio (issue #9: por ejemplo, "consultas
-  por curso" o "temas más consultados") sin tener que parsear JSONB en cada query.
+  por curso" o "temas más consultados") sin tener que parsear JSONB en cada query. Queda
+  **fuera de alcance / diferida** en esta entrega: no se crea como tabla porque ninguna consulta
+  actual la requiere (las agregaciones se resuelven sobre `conversaciones_asistente` con JSONB).
 
 Esta duplicación controlada se justificará con más detalle (ventajas/costos de mantenerla
 sincronizada) en las decisiones de normalización/desnormalización de la issue #16.

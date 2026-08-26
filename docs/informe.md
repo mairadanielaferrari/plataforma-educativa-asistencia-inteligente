@@ -58,7 +58,7 @@ asistente) y en los `db/datos/*_seed.sql` de cada subdominio (ver sección 9).
 | Operacional | Inscripciones, entregas, calificaciones, conversaciones — todo lo que se escribe en el día a día |
 | Analítico | `progreso_academico` (agregado recalculado periódicamente) |
 | Sensible | Datos personales de `estudiantes`; `calificaciones`, `progreso_academico` y `conversaciones_asistente` (desempeño y dificultades individuales); materiales `restringido` |
-| Auditoría | `eventos_asistente` (uso del asistente, derivaciones); todo cambio de calificación queda auditado en la misma transacción |
+| Auditoría | `eventos_auditoria` (cambios de calificación y acciones sensibles); `eventos_asistente` (uso del asistente, derivaciones); todo cambio de calificación queda auditado en `eventos_auditoria` en la misma transacción |
 | Vectorial | `fragmento_embeddings` (materiales), `consultas_frecuentes_embeddings` (FAQ del asistente) |
 
 ## 4. Modelo conceptual
@@ -131,7 +131,7 @@ volumen (institución educativa, no escala masiva) que no exige esa separación 
 Se implementó y **se probó de punta a punta** contra el Postgres+pgvector del
 `docker-compose.yml` (esquema completo, reseteando el volumen y corriendo desde cero):
 
-1. `db/estructura/*.sql` — tablas de los cuatro subdominios (16 scripts).
+1. `db/estructura/*.sql` — tablas de los cuatro subdominios (24 scripts, 19 tablas).
 2. `db/datos/*.sql` — seeds de los cuatro subdominios (6 scripts).
 3. `db/indices_vistas/*.sql` — vistas (ranking de estudiantes, ocupación de cursos).
 4. `db/integracion/*.sql` — FKs cross-subdominio (#5) y RLS de evaluación/asistente (#17).
@@ -156,7 +156,7 @@ integración (ver `analisis_caso_uso.md`, sección 6).
 
 ## 10. Consultas representativas
 
-24 consultas SQL en total (mínimo pedido: 5), todas probadas contra los datos de ejemplo:
+26 consultas SQL en total (mínimo pedido: 5), todas probadas contra los datos de ejemplo:
 
 | Archivo (en `db/consultas/`) | Subdominio | # | Cubre |
 |---|---|---|---|

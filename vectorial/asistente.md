@@ -3,8 +3,10 @@
 > Issue [#13](https://github.com/mairadanielaferrari/plataforma-educativa-asistencia-inteligente/issues/13).
 > Depende de #7 y #11 (ambas cerradas). Implementación en
 > [`db/estructura/vectorial_01_extension.sql`](../db/estructura/vectorial_01_extension.sql),
-> [`..._02_material_fragmentos.sql`](../db/estructura/vectorial_02_material_fragmentos.sql),
-> [`..._03_consultas_frecuentes.sql`](../db/estructura/vectorial_03_consultas_frecuentes.sql),
+> [`materiales_vectorial_02_fragmentos.sql`](../db/estructura/materiales_vectorial_02_fragmentos.sql)
+> y [`materiales_vectorial_03_embeddings.sql`](../db/estructura/materiales_vectorial_03_embeddings.sql)
+> (modelo normalizado que reemplazó al denormalizado, ver nota de integración abajo),
+> [`vectorial_03_consultas_frecuentes.sql`](../db/estructura/vectorial_03_consultas_frecuentes.sql),
 > seed en [`db/datos/vectorial_asistente_seed.sql`](../db/datos/vectorial_asistente_seed.sql) y
 > consultas en [`db/consultas/vectorial_asistente_consultas.sql`](../db/consultas/vectorial_asistente_consultas.sql).
 > Todo corrido contra el Postgres + pgvector del `docker-compose.yml` del repo.

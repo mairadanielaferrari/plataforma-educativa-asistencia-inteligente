@@ -1,5 +1,7 @@
 -- Consultas de ejemplo sobre el modelo documental del asistente (issue #11).
 -- Requiere haber corrido el DDL y el seed de conversaciones_asistente / eventos_asistente.
+-- La consulta 2 resuelve el título del material citado por JOIN a materiales (subdominio #10): la
+-- cita solo guarda documento_id, no una copia del título (modelo por referencia, ver nosql/asistente.md).
 
 -- 1) Traer una conversación completa con sus mensajes y fuentes embebidas.
 -- Pregunta: "¿qué se dijeron el estudiante y el asistente en esta conversación?"
@@ -13,11 +15,12 @@ SELECT
     c.id AS conversacion_id,
     msg->>'timestamp' AS timestamp,
     fuente->>'documento_id' AS documento_id,
-    fuente->>'titulo' AS titulo,
+    m.titulo AS titulo,
     (fuente->>'similitud')::numeric AS similitud
 FROM conversaciones_asistente c,
      jsonb_array_elements(c.mensajes) AS msg,
      jsonb_array_elements(msg->'fuentes_utilizadas') AS fuente
+LEFT JOIN materiales m ON m.id = fuente->>'documento_id'
 WHERE msg->>'rol' = 'asistente';
 
 -- 3) Conversaciones que citaron un documento específico como fuente (containment @>).

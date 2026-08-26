@@ -1,6 +1,9 @@
 -- Subdominio: evaluación y asistente (issue #7)
 -- Catálogo de roles usado por el subdominio de evaluación/asistente y, potencialmente,
 -- compartido con el resto de la plataforma tras la integración (issue #5).
+-- La definición de `roles` es idéntica a la de gestion_academica_01_roles.sql (dueño del catálogo):
+-- la duplicación es intencional e idempotente (CREATE TABLE IF NOT EXISTS + ON CONFLICT DO NOTHING),
+-- de modo que ambos scripts convivan sin conflicto hasta consolidarse en la integración (issue #5).
 
 CREATE TABLE IF NOT EXISTS roles (
     id          VARCHAR(20) PRIMARY KEY,

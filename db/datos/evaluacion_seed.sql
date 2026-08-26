@@ -30,8 +30,18 @@ INSERT INTO calificaciones (id, entrega_id, docente_id, nota, escala, feedback, 
     ('cal-003', 'ent-004', 'doc-001', 9.0, '0-10', 'Correcta normalización tras la reentrega.', '2026-03-26 08:40:00-03', TRUE),
     ('cal-004', 'ent-003', 'doc-001', NULL, '0-10', NULL, NULL, FALSE);
 
+-- periodo usa la etiqueta autoritativa del período académico de gestión académica
+-- (periodos_academicos.nombre = '2026-C1'), para que progreso y período sean uno solo.
 INSERT INTO progreso_academico (id, estudiante_id, curso_id, periodo, actividades_completadas, actividades_totales, promedio_notas, porcentaje_avance, ultima_actividad, en_riesgo) VALUES
-    ('prog-001', 'est-001', 'cur-101', '2026-Q1', 4, 6, 7.8, 66.7, '2026-04-15', FALSE),
-    ('prog-002', 'est-002', 'cur-101', '2026-Q1', 2, 6, 6.0, 33.3, '2026-03-25', TRUE),
-    ('prog-003', 'est-003', 'cur-101', '2026-Q1', 5, 6, 8.9, 83.3, '2026-04-10', FALSE),
-    ('prog-004', 'est-004', 'cur-102', '2026-Q1', 1, 5, 5.5, 20.0, '2026-03-08', TRUE);
+    ('prog-001', 'est-001', 'cur-101', '2026-C1', 4, 6, 7.8, 66.7, '2026-04-15', FALSE),
+    ('prog-002', 'est-002', 'cur-101', '2026-C1', 2, 6, 6.0, 33.3, '2026-03-25', TRUE),
+    ('prog-003', 'est-003', 'cur-101', '2026-C1', 5, 6, 8.9, 83.3, '2026-04-10', FALSE),
+    ('prog-004', 'est-004', 'cur-102', '2026-C1', 1, 5, 5.5, 20.0, '2026-03-08', TRUE);
+
+-- Auditoría: la recalificación de la reentrega de est-003 (cal-003 = ent-004, act-001) generó su
+-- evento cambio_calificacion, como exige la regla de dominio (docs/seguridad.md, sección 5). El
+-- usuario que la originó es el docente doc-001 (usuario usr-005). detalle guarda nota anterior/nueva.
+INSERT INTO eventos_auditoria (id, tipo_evento, usuario_id, rol, entidad_afectada, entidad_id, fecha, detalle) VALUES
+    ('aud-001', 'cambio_calificacion', 'usr-005', 'docente', 'calificaciones', 'cal-003', '2026-03-26 08:40:00-03',
+        '{"nota_anterior": 6.0, "nota_nueva": 9.0, "motivo": "recalificacion tras reentrega (act-001)"}'::jsonb)
+ON CONFLICT (id) DO NOTHING;

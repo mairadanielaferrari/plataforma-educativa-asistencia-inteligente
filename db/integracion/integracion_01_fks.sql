@@ -61,4 +61,10 @@ BEGIN
         ALTER TABLE consultas_frecuentes_embeddings ADD CONSTRAINT fk_consultas_frecuentes_curso
             FOREIGN KEY (curso_id) REFERENCES cursos (id);
     END IF;
+
+    -- eventos_auditoria -> usuarios (opcional; el usuario que originó la acción auditada)
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_eventos_auditoria_usuario') THEN
+        ALTER TABLE eventos_auditoria ADD CONSTRAINT fk_eventos_auditoria_usuario
+            FOREIGN KEY (usuario_id) REFERENCES usuarios (id);
+    END IF;
 END $$;

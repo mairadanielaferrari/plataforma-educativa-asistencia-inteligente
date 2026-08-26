@@ -82,3 +82,76 @@ DROP POLICY IF EXISTS conversaciones_propias ON conversaciones_asistente;
 CREATE POLICY conversaciones_propias ON conversaciones_asistente
     FOR SELECT TO app_estudiante
     USING (estudiante_id = current_setting('app.estudiante_id', true));
+
+-- Políticas para los roles no-estudiante. Con RLS habilitada un rol sin política no ve ninguna fila
+-- aunque tenga GRANT; estas políticas permisivas (USING true, acotadas por TO ...) reponen el acceso
+-- amplio de los GRANT de más arriba sin tocar el aislamiento del estudiante. El docente además
+-- corrige y publica (GRANT SELECT, INSERT, UPDATE ON calificaciones, actividades, evaluaciones), por
+-- eso esas tres tablas llevan políticas de escritura para app_docente.
+-- Idempotente: DROP POLICY IF EXISTS antes de cada CREATE.
+
+-- actividades: docente (lectura + escritura) y coordinador (lectura).
+DROP POLICY IF EXISTS actividades_lectura_docente ON actividades;
+CREATE POLICY actividades_lectura_docente ON actividades
+    FOR SELECT TO app_docente USING (true);
+DROP POLICY IF EXISTS actividades_lectura_coordinador ON actividades;
+CREATE POLICY actividades_lectura_coordinador ON actividades
+    FOR SELECT TO app_coordinador USING (true);
+DROP POLICY IF EXISTS actividades_alta_docente ON actividades;
+CREATE POLICY actividades_alta_docente ON actividades
+    FOR INSERT TO app_docente WITH CHECK (true);
+DROP POLICY IF EXISTS actividades_edicion_docente ON actividades;
+CREATE POLICY actividades_edicion_docente ON actividades
+    FOR UPDATE TO app_docente USING (true) WITH CHECK (true);
+
+-- evaluaciones: docente (lectura + escritura) y coordinador (lectura).
+DROP POLICY IF EXISTS evaluaciones_lectura_docente ON evaluaciones;
+CREATE POLICY evaluaciones_lectura_docente ON evaluaciones
+    FOR SELECT TO app_docente USING (true);
+DROP POLICY IF EXISTS evaluaciones_lectura_coordinador ON evaluaciones;
+CREATE POLICY evaluaciones_lectura_coordinador ON evaluaciones
+    FOR SELECT TO app_coordinador USING (true);
+DROP POLICY IF EXISTS evaluaciones_alta_docente ON evaluaciones;
+CREATE POLICY evaluaciones_alta_docente ON evaluaciones
+    FOR INSERT TO app_docente WITH CHECK (true);
+DROP POLICY IF EXISTS evaluaciones_edicion_docente ON evaluaciones;
+CREATE POLICY evaluaciones_edicion_docente ON evaluaciones
+    FOR UPDATE TO app_docente USING (true) WITH CHECK (true);
+
+-- entregas: docente y coordinador leen todas las del ámbito (solo lectura).
+DROP POLICY IF EXISTS entregas_lectura_docente ON entregas;
+CREATE POLICY entregas_lectura_docente ON entregas
+    FOR SELECT TO app_docente USING (true);
+DROP POLICY IF EXISTS entregas_lectura_coordinador ON entregas;
+CREATE POLICY entregas_lectura_coordinador ON entregas
+    FOR SELECT TO app_coordinador USING (true);
+
+-- calificaciones: el docente corrige (lectura + escritura); el coordinador lee.
+DROP POLICY IF EXISTS calificaciones_lectura_docente ON calificaciones;
+CREATE POLICY calificaciones_lectura_docente ON calificaciones
+    FOR SELECT TO app_docente USING (true);
+DROP POLICY IF EXISTS calificaciones_lectura_coordinador ON calificaciones;
+CREATE POLICY calificaciones_lectura_coordinador ON calificaciones
+    FOR SELECT TO app_coordinador USING (true);
+DROP POLICY IF EXISTS calificaciones_alta_docente ON calificaciones;
+CREATE POLICY calificaciones_alta_docente ON calificaciones
+    FOR INSERT TO app_docente WITH CHECK (true);
+DROP POLICY IF EXISTS calificaciones_edicion_docente ON calificaciones;
+CREATE POLICY calificaciones_edicion_docente ON calificaciones
+    FOR UPDATE TO app_docente USING (true) WITH CHECK (true);
+
+-- progreso_academico: docente y coordinador leen (solo lectura; lo recalcula un job).
+DROP POLICY IF EXISTS progreso_lectura_docente ON progreso_academico;
+CREATE POLICY progreso_lectura_docente ON progreso_academico
+    FOR SELECT TO app_docente USING (true);
+DROP POLICY IF EXISTS progreso_lectura_coordinador ON progreso_academico;
+CREATE POLICY progreso_lectura_coordinador ON progreso_academico
+    FOR SELECT TO app_coordinador USING (true);
+
+-- conversaciones_asistente: docente y coordinador leen (solo lectura).
+DROP POLICY IF EXISTS conversaciones_lectura_docente ON conversaciones_asistente;
+CREATE POLICY conversaciones_lectura_docente ON conversaciones_asistente
+    FOR SELECT TO app_docente USING (true);
+DROP POLICY IF EXISTS conversaciones_lectura_coordinador ON conversaciones_asistente;
+CREATE POLICY conversaciones_lectura_coordinador ON conversaciones_asistente
+    FOR SELECT TO app_coordinador USING (true);

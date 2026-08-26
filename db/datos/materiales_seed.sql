@@ -1,7 +1,9 @@
 -- Datos de ejemplo del subdominio materiales de estudio (issue #10).
 -- Requiere db/estructura/gestion_academica_*.sql (cursos, docentes) y materiales_01_materiales.sql.
--- Los ids mat-014/mat-002/mat-021/mat-099 coinciden con los que el subdominio del asistente cita
--- como fuente (ver db/datos/vectorial_asistente_seed.sql), para que la integración (issue #5) cierre.
+-- El asistente cita como fuente solo mat-014 y mat-002 (ver las conversaciones de
+-- db/datos/nosql_asistente_seed.sql), para que la integración (issue #5) cierre. mat-099 es
+-- nivel_acceso='restringido' (normativa interna docente): NO es citable por el asistente, solo
+-- tiene fragmentos vectorizados en db/datos/materiales_vectorial_seed.sql para el control de acceso.
 -- El metadata cambia de forma según el tipo: esa es la razón de usar JSONB.
 
 INSERT INTO materiales (id, curso_id, autor_id, titulo, tipo, nivel_acceso, version, fecha_publicacion, metadata) VALUES
