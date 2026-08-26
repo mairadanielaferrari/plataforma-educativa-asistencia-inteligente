@@ -14,7 +14,7 @@ INSERT INTO conversaciones_asistente (id, estudiante_id, curso_id, fecha_inicio,
         "texto": "Una tabla está en 3FN si, además de cumplir 2FN, ningún atributo no clave depende transitivamente de la clave primaria...",
         "timestamp": "2026-04-05T21:03:22-03:00",
         "fuentes_utilizadas": [
-            {"documento_id": "mat-014", "titulo": "Apunte: Normalización de bases de datos", "fragmento_id": "mat-014#frag-3", "similitud": 0.87}
+            {"documento_id": "mat-014", "fragmento_id": "mat-014#frag-3", "similitud": 0.87}
         ]
     }
 ]'::jsonb),
@@ -29,7 +29,7 @@ INSERT INTO conversaciones_asistente (id, estudiante_id, curso_id, fecha_inicio,
         "texto": "La clave primaria identifica de forma única cada fila de una tabla, y la clave foránea referencia la clave primaria de otra tabla para modelar una relación.",
         "timestamp": "2026-03-20T15:12:40-03:00",
         "fuentes_utilizadas": [
-            {"documento_id": "mat-002", "titulo": "Apunte: Modelo relacional", "fragmento_id": "mat-002#frag-1", "similitud": 0.91}
+            {"documento_id": "mat-002", "fragmento_id": "mat-002#frag-1", "similitud": 0.91}
         ]
     }
 ]'::jsonb),

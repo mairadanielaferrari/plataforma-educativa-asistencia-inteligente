@@ -119,7 +119,7 @@ Todas las decisiones, con su justificación, están desarrolladas en
 
 ## Consultas incluidas
 
-24 consultas SQL representativas (mínimo pedido: 5), repartidas en `db/consultas/` por
+26 consultas SQL representativas (mínimo pedido: 5), repartidas en `db/consultas/` por
 subdominio y tecnología (relacional, JSONB, vectorial), cada una con una consulta que
 justifica el uso de un índice o una vista. Listado completo en
 [`docs/informe.md`](docs/informe.md), sección 10.

@@ -27,7 +27,7 @@ flowchart LR
 
     subgraph Operacional["Almacenamiento operacional (PostgreSQL)"]
         REL["Relacional<br/>actividades · evaluaciones<br/>entregas · calificaciones"]
-        DOC["Documental (JSONB)<br/>conversaciones_asistente<br/>eventos_asistente"]
+        DOC["Documental (JSONB)<br/>conversaciones_asistente<br/>eventos_asistente<br/>eventos_auditoria"]
         VEC["Vectorial (pgvector)<br/>material_fragmentos_embeddings<br/>consultas_frecuentes_embeddings"]
     end
 
@@ -60,7 +60,8 @@ flowchart LR
   o al recibir una consulta, cuyo resultado se guarda en las tablas vectoriales).
 - **Almacenamiento operacional**: las tres representaciones ya implementadas (#7, #11, #13)
   conviven en la misma base, lo que permite transacciones que tocan más de una (p. ej.
-  registrar una `entrega` y, si corresponde, un `evento_auditoria`, en la misma transacción).
+  registrar una `entrega`/`calificacion` y, si corresponde, una fila en `eventos_auditoria`
+  (auditoría, distinta de `eventos_asistente`), en la misma transacción).
 - **Almacenamiento analítico**: `progreso_academico` es la única tabla explícitamente
   analítica de este subdominio (agregado precalculado, no se recalcula en cada lectura). No se
   justifica un Data Warehouse separado con el volumen esperado; si el análisis histórico
@@ -74,8 +75,8 @@ flowchart LR
 ## 2. Concurrencia
 
 - **Corrección de una entrega**: `UPDATE`/`INSERT` sobre `calificaciones` dentro de una
-  transacción que también inserta el `evento_auditoria` correspondiente — si el evento de
-  auditoría no se pudo escribir, la calificación tampoco se confirma (todo o nada).
+  transacción que también inserta la fila `cambio_calificacion` en `eventos_auditoria` — si el
+  evento de auditoría no se pudo escribir, la calificación tampoco se confirma (todo o nada).
 - **Reintentos de entrega concurrentes**: el `UNIQUE (estudiante_id, actividad_id, intento)`
   en `entregas` (issue #7) evita que dos requests simultáneos del mismo estudiante generen el
   mismo número de intento; el intento siguiente se calcula con `SELECT ... FOR UPDATE` sobre

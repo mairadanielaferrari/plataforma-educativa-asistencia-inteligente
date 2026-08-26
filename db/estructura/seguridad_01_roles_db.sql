@@ -12,6 +12,20 @@ BEGIN
     IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'app_administrador') THEN CREATE ROLE app_administrador NOLOGIN; END IF;
 END $$;
 
+-- Rol de conexión de la aplicación: login dedicado, NO dueño de las tablas y NOINHERIT, de modo
+-- que NO herede permisos por sí mismo y no pueda saltear RLS (el dueño de las tablas sí la saltea,
+-- por eso la app nunca se conecta como dueño; ver docs/seguridad.md). La aplicación se conecta como
+-- app_conexion y hace SET ROLE <rol> + SET LOCAL app.estudiante_id = <id> en cada request. Los GRANT
+-- de abajo le permiten asumir cualquiera de los roles de permisos.
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'app_conexion') THEN
+        CREATE ROLE app_conexion LOGIN NOINHERIT;
+    END IF;
+END $$;
+
+GRANT app_estudiante, app_docente, app_coordinador, app_administrador TO app_conexion;
+
 GRANT USAGE ON SCHEMA public TO app_estudiante, app_docente, app_coordinador, app_administrador;
 
 -- Estudiante: solo lectura de su información académica y del material (acotado por RLS). NO recibe

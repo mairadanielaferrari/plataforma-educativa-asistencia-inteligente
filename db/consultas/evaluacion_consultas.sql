@@ -47,7 +47,8 @@ ORDER BY promedio_nota NULLS LAST;
 
 -- 4) Consulta orientada a la toma de decisiones
 -- ¿Qué estudiantes están en riesgo académico y requieren seguimiento de un tutor?
--- Alimenta las recomendaciones/alertas del subdominio asistente (issue #11, #13).
+-- Alimenta las alertas de riesgo académico del subdominio asistente (issue #13). Las
+-- recomendaciones de estudio quedan fuera de alcance (ver modelo conceptual), no hay tabla propia.
 SELECT
     p.estudiante_id,
     p.curso_id,
@@ -67,5 +68,5 @@ ORDER BY p.porcentaje_avance ASC;
 -- consulta del dashboard docente.
 SELECT curso_id, periodo, estudiante_id, promedio_notas, ranking
 FROM vw_ranking_estudiantes_curso
-WHERE curso_id = 'cur-101' AND periodo = '2026-Q1'
+WHERE curso_id = 'cur-101' AND periodo = '2026-C1'
 ORDER BY ranking;
